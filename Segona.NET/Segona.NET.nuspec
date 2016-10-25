@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Incentro.Segona.Segona.NET</id>
+    <version>$version$</version>
+    <authors>Marlowe Antonius</authors>
+    <owners>Marlowe Antonius / Incentro</owners>
+    <projectUrl>https://github.com/marlowe19/Segona.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>>.net client for making segona calls visit //segona.io for more information</description>
+    <releaseNotes>First release</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Segona Digital Assetmanagement</tags>
+    <dependencies>
+	  <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
+	  <dependency id="Newtonsoft.Json" version="6.0.4" />
+    </dependencies>
+  </metadata>
+</package>
