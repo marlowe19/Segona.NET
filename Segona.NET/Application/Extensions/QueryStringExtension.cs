@@ -20,9 +20,13 @@ namespace Segona.Net.Application.Extensions
                 var parameterName = property.Name;
                 var attributeValue = property.GetCustomAttributes<QueryParameterAttribute>();
 
-                if (attributeValue != null)
+                if (attributeValue != null && attributeValue.Any())
                 {
-                    parameterName = attributeValue.First().Name;
+                    parameterName = attributeValue.First()?.Name;
+                }
+                else
+                {
+                    continue;
                 }
                 var parameterItem = $"{parameterName}={propertyValue}&";
                 output = output + parameterItem;

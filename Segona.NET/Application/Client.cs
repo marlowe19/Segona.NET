@@ -1,5 +1,7 @@
-﻿using System.Net.Http;
+﻿using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Segona.Net.Application.Attributes;
 using Segona.NET.Application;
 using Segona.NET.Application.Contracts;
 
@@ -34,18 +36,27 @@ namespace Segona.Net.Application
             var response = await _client.GetAsync(url);
             return await response.Content.ReadAsAsync<Response>();
         }
+      
         public async Task<IResponse> GetAllAsync(RequestSettings settings)
         {
           
             var url = _handler.CreateApiUrl(_segonaUrl,"list",settings);
+            if (settings.Debug)
+            {
+                Debug.Write("Request url" + url);
+            }
             var response = await _client.GetAsync(url);
             return await response.Content.ReadAsAsync<Response>(); 
         }
-
+        
         public async Task<IResponse> FilterAsync(RequestSettings settings)
         {
 
             var url = _handler.CreateApiUrl(_segonaUrl,"filter", settings);
+            if (settings.Debug)
+            {
+                Debug.Write("Request url" + url);
+            }
             var response = await _client.GetAsync(url);
             return await response.Content.ReadAsAsync<Response>();
         }

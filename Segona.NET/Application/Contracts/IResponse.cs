@@ -9,7 +9,7 @@ namespace Segona.NET.Application.Contracts
 {
     public interface IResponse
     {
-         List<IAsset> items { get; set; }
+         List<Asset> items { get; set; }
          string kind { get; set; }
          string etag { get; set; }
     }

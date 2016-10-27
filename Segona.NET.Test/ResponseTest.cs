@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Segona.Net.Application.Contracts;
 using Segona.NET.Application.Contracts;
 
-namespace Segona.NET.Application
+namespace Segona.NET.Test
 {
-    public class Response:IResponse
+    public class ResponseTest:IResponse
     {
+       
         public List<Asset> items { get; set; }
         public string kind { get; set; }
         public string etag { get; set; }

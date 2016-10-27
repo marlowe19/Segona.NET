@@ -11,6 +11,7 @@ namespace Segona.Net.Application
     {
         public string CreateApiUrl(string apiUrl, string command,RequestSettings settings)
         {
+            var query = settings.ToQueryString();
             return $"{apiUrl}{command}?{settings.ToQueryString()}";
         }
     }

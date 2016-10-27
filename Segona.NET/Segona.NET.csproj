@@ -59,6 +59,7 @@
     <Compile Include="Application\RequestSettingsFluent.cs" />
     <Compile Include="Application\Response.cs" />
     <Compile Include="Application\UriHandler.cs" />
+    <Compile Include="Asset.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
