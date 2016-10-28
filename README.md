@@ -6,11 +6,11 @@ Segona.NET provides an easy way to connect the segona api.
 
 
 Usage:
-```
+```C#
 var segonaClient = new SegonaClient()
 var requestSettings = new RequestSettings{
-apikey = "Your Segona Api Key"
-}
+          apikey = "Your Segona Api Key"
+      }
 
 var response = segonaClient.getAllAsync(requestSettings);
 ```                          
