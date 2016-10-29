@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Incentro.Segona.Core.Application.Attributes
+namespace Incentro.Segona.Core.Attributes
 {
     public class QueryParameterAttribute : Attribute
     {

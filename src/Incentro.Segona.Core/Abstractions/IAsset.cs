@@ -1,4 +1,4 @@
-﻿namespace Incentro.Segona.Core.Application.Contracts
+﻿namespace Incentro.Segona.Core.Abstractions
 {
     public interface IAsset
     {

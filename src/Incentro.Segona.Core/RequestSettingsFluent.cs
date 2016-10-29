@@ -1,4 +1,4 @@
-﻿namespace Incentro.Segona.Core.Application
+﻿namespace Incentro.Segona.Core
 {
     public class RequestSettingsFluent
     {

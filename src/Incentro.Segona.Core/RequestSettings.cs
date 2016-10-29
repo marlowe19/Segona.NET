@@ -1,6 +1,6 @@
-﻿using Incentro.Segona.Core.Application.Attributes;
+﻿using Incentro.Segona.Core.Attributes;
 
-namespace Incentro.Segona.Core.Application
+namespace Incentro.Segona.Core
 {
     public class RequestSettings
     {

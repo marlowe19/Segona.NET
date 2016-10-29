@@ -2,7 +2,6 @@
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Incentro.Segona.Core.Application;
 using NUnit.Framework;
 
 namespace Incentro.Segona.Core.Test

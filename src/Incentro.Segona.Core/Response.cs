@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Incentro.Segona.Core.Application.Contracts;
+using Incentro.Segona.Core.Abstractions;
 
-namespace Incentro.Segona.Core.Application
+namespace Incentro.Segona.Core
 {
     public class Response : IResponse
     {

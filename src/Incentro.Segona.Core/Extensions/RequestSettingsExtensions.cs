@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Incentro.Segona.Core.Application.Attributes;
+using Incentro.Segona.Core.Attributes;
 
-namespace Incentro.Segona.Core.Application.Extensions
+namespace Incentro.Segona.Core.Extensions
 {
-    public static class QueryStringExtension
+    public static class RequestSettingsExtensions
     {
         public static string ToQueryString(this RequestSettings settings)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Incentro.Segona.Core.Application.Contracts
+namespace Incentro.Segona.Core.Abstractions
 {
     public interface IResponse
     {

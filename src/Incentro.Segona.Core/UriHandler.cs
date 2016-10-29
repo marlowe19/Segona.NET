@@ -1,6 +1,6 @@
-﻿using Incentro.Segona.Core.Application.Extensions;
+﻿using Incentro.Segona.Core.Extensions;
 
-namespace Incentro.Segona.Core.Application
+namespace Incentro.Segona.Core
 {
     public class UriHandler
     {

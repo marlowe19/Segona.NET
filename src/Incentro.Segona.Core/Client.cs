@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Incentro.Segona.Core.Application.Contracts;
+using Incentro.Segona.Core.Abstractions;
 using Newtonsoft.Json;
 
-namespace Incentro.Segona.Core.Application
+namespace Incentro.Segona.Core
 {
     public class SegonaClient
     {
