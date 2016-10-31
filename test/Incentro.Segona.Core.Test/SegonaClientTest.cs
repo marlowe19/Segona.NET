@@ -2,14 +2,13 @@
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Incentro.Segona.Core.Test
 {
-    [TestFixture]
     public class ClientTest : TestBase
     {
-        [Test]
+        [Fact]
         public async Task Get_Request_Should_Be_Of_Json_Type()
         {
 
@@ -21,8 +20,8 @@ namespace Incentro.Segona.Core.Test
             response.Content.Headers.ContentType.ToString().Should().Contain("json");
         }
 
-        [Test]
-        [TestCase("obama")]
+        [Theory]
+        [InlineData("obama")]
         public async Task Search_Segona(string searchkeyword)
         {
             var uri = new UriHandler();
@@ -33,7 +32,7 @@ namespace Incentro.Segona.Core.Test
             result.IsSuccessStatusCode.Should().BeTrue();
         }
 
-        [Test]
+        [Fact]
         public async Task Is_the_right_Object_Passed()
         {
             var webclient = new SegonaClient(SegonaConfiguration.ApiUrl);
@@ -49,14 +48,14 @@ namespace Incentro.Segona.Core.Test
 
             var result = await webclient.GetAllAsync(parameters);
 
-            Assert.AreEqual(true, isRequestSettings);
+            Assert.Equal(true, isRequestSettings);
         }
         
         public async Task SegonaConnecionTest()
         {
             var webclient = new HttpClient();
             var result = await webclient.GetAsync(SegonaConfiguration.ApiUrl);
-            Assert.AreEqual(true, result.IsSuccessStatusCode);
+            Assert.Equal(true, result.IsSuccessStatusCode);
         }
     }
 }
