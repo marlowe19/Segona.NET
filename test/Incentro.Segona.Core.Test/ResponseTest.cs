@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Incentro.Segona.Core.Abstractions;
+﻿using Incentro.Segona.Core.Abstractions;
+using System.Collections.Generic;
 
 namespace Incentro.Segona.Core.Test
 {

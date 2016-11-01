@@ -38,6 +38,13 @@ namespace Incentro.Segona.Core
             return JsonConvert.DeserializeObject<Response>(await response.Content.ReadAsStringAsync());
         }
 
+        public async Task<ImageAsset> GetAssetById(RequestSettings settings)
+        {
+            var url = _handler.CreateApiUrl(_segonaUrl, "get", settings);
+            var response = await _client.GetAsync(url);
+
+            return JsonConvert.DeserializeObject<ImageAsset>(await response.Content.ReadAsStringAsync());
+        }
         public async Task<IResponse> GetAllAsync(RequestSettings settings)
         {
 

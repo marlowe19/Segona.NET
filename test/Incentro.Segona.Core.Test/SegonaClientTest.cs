@@ -2,7 +2,9 @@
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Incentro.Segona.Core.Test.Extensions;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Incentro.Segona.Core.Test
 {
@@ -31,7 +33,44 @@ namespace Incentro.Segona.Core.Test
 
             result.IsSuccessStatusCode.Should().BeTrue();
         }
+        
+        [Fact]
+        public async Task Get_Single_Item_From_Segona()
+        {
+            var client = new HttpClient();
+            var url =
+                $"{SegonaConfiguration.ApiUrl}get?apiKey={SegonaConfiguration.ApiKey}&id=2b137408-f7a6-4357-ac7f-639adc9d8cad";
+            var item = client.GetAsync(url).Result;
 
+            item.IsSuccessStatusCode.Should().Be(false);
+        }
+
+        [Fact]
+        public async Task Method_Exists()
+        {
+            var settings = new RequestSettings
+            {
+                Id = "2b137408-f7a6-4357-ac7f-639adc9d8cad",
+                ApiKey = SegonaConfiguration.ApiKey
+            };
+            var client = new SegonaClient(SegonaConfiguration.ApiUrl);
+            var segona = await client.GetAssetById(settings);
+
+            segona.Should().NotBe(null);
+        }
+        [Fact]
+        public void Should_Return_Correct_Single_Call_url_By_Id()
+        {
+            var urlToMatch =  $"{SegonaConfiguration.ApiUrl}get?apiKey={SegonaConfiguration.ApiKey}&id=2b137408-f7a6-4357-ac7f-639adc9d8cad";
+            var uriClient = new UriHandler();
+
+            var url = uriClient.CreateApiUrl(SegonaConfiguration.ApiUrl, "get",new RequestSettings {ApiKey = SegonaConfiguration.ApiKey, Id = "2b137408-f7a6-4357-ac7f-639adc9d8cad" });
+
+            url.Should().BeEquivalentTo(urlToMatch);
+
+        }
+
+        
         [Fact]
         public async Task Is_the_right_Object_Passed()
         {

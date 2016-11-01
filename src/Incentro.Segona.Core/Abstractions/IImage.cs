@@ -1,6 +1,6 @@
 ﻿namespace Incentro.Segona.Core.Abstractions
 {
-    public interface IImage : IAsset
+    public interface IImageAsset : IAsset, IMetaData
     {
 
     }
