@@ -18,8 +18,10 @@ namespace Incentro.Segona.Core
 
         public bool Debug { get; set; }
 
+        [QueryParameter("id")]
+        public string Id { get; set; }
+
         [QueryParameter("color")]
         public string Color { get; set; }
-
     }
 }
