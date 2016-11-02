@@ -5,8 +5,8 @@ namespace Incentro.Segona.Core
 {
     public class Response : IResponse
     {
-        public List<Asset> items { get; set; }
-        public string kind { get; set; }
-        public string etag { get; set; }
+        public List<Asset> Items { get; set; }
+        public string Kind { get; set; }
+        public string Etag { get; set; }
     }
 }

@@ -5,15 +5,15 @@ namespace Incentro.Segona.Core
 {
     public class ImageAsset : IImageAsset
     {
-        public string id { get; set; }
-        public string originalName { get; set; }
-        public string url { get; set; }
-        public string thumbnail { get; set; }
-        public string shareableUrl { get; set; }
-        public string kind { get; set; }
-        public Dictionary<string, double> labels { get; set; }
-        public List<string> colors { get; set; }
-        public List<string> detectedText { get; set; }
+        public string Id { get; set; }
+        public string OriginalName { get; set; }
+        public string Url { get; set; }
+        public string Thumbnail { get; set; }
+        public string ShareableUrl { get; set; }
+        public string Kind { get; set; }
+        public Dictionary<string, double> Labels { get; set; }
+        public List<string> Colors { get; set; }
+        public List<string> DetectedText { get; set; }
         public string RawData { get; set; }
     }
 }
