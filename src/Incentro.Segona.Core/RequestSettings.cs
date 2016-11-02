@@ -23,6 +23,5 @@ namespace Incentro.Segona.Core
 
         [QueryParameter("color")]
         public string Color { get; set; }
-
     }
 }
