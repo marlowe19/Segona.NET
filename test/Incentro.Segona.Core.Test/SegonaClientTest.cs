@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Incentro.Segona.Core.Abstractions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -8,11 +10,13 @@ namespace Incentro.Segona.Core.Test
 {
     public class ClientTest : TestBase
     {
-        private SegonaClient _segonaClient;
+        private ISegonaClient _segonaClient;
 
         public ClientTest()
+
         {
-            _segonaClient = new SegonaClient(SegonaConfiguration.ApiKey);
+            var _segonaClient = Provider.GetService<ISegonaClient>();
+            _segonaClient = new SegonaClient(SegonaConfiguration.ApiUrl);
         }
 
         [Fact]
@@ -47,7 +51,7 @@ namespace Incentro.Segona.Core.Test
                 $"{SegonaConfiguration.ApiUrl}get?apiKey={SegonaConfiguration.ApiKey}&id=2b137408-f7a6-4357-ac7f-639adc9d8cad";
             var item = await client.GetAsync(url);
 
-            item.IsSuccessStatusCode.Should().Be(false);
+            item.IsSuccessStatusCode.Should().Be(true);
         }
 
         [Fact]
