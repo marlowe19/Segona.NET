@@ -73,7 +73,7 @@ namespace Incentro.Segona.Core.Test
         {
             var specificAsset = await Client.GetSpecificAssetAsync(GetUrl("get"), SegonaConfiguration.ApiKey, new Guid());
             AssertInvalidResponse(specificAsset);
-            Assert.True(specificAsset.Error.Error.Errors.Any());
+            Assert.NotEmpty(specificAsset.Error.Error.Errors);
             Assert.Equal("notFound", specificAsset.Error.Error.Errors.First().Reason);
         }
 
@@ -83,7 +83,7 @@ namespace Incentro.Segona.Core.Test
             // TODO: It's probably better to get an item first, scan for a tag, and then use that tag to search
             var searchAssets = await Client.SearchAssets(GetUrl("search"), SegonaConfiguration.ApiKey, "ocean");
             AssertValidResponse(searchAssets);
-            Assert.True(searchAssets.Result.Items.Any());
+            Assert.NotEmpty(searchAssets.Result.Items);
         }
 
         [Fact]
@@ -92,6 +92,30 @@ namespace Incentro.Segona.Core.Test
             var searchAssets = await Client.SearchAssets(GetUrl("search"), SegonaConfiguration.ApiKey, "23r08usdvjksj");
             AssertValidResponse(searchAssets);
             Assert.True(searchAssets.Result.Items == null || !searchAssets.Result.Items.Any());
+        }
+
+        [Fact]
+        public async Task FilterSearchAssets_With_Color()
+        {
+            var searchAssets = await Client.FilteredSearchAssets(GetUrl("filter"), SegonaConfiguration.ApiKey, "ocean", color: "Blue");
+            AssertValidResponse(searchAssets);
+            Assert.NotEmpty(searchAssets.Result.Items);
+        }
+
+        [Fact]
+        public async Task FilterSearchAssets_With_ExtraQuery()
+        {
+            var searchAssets = await Client.FilteredSearchAssets(GetUrl("filter"), SegonaConfiguration.ApiKey, "ocean", extraQuery: "ship");
+            AssertValidResponse(searchAssets);
+            Assert.NotEmpty(searchAssets.Result.Items);
+        }
+
+        [Fact]
+        public async Task GetUploadUrl()
+        {
+            var uploadUrl = await Client.GetUploadUrl(GetUrl("upload"), SegonaConfiguration.ApiKey);
+            AssertValidResponse(uploadUrl);
+            Assert.False(string.IsNullOrEmpty(uploadUrl.Result.UploadUrl.ToString()));
         }
 
         protected void AssertValidResponse<T>(SegonaResponse<T> response)
