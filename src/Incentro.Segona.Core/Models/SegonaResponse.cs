@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace Incentro.Segona.Core.Models
 {
@@ -15,5 +11,7 @@ namespace Incentro.Segona.Core.Models
         public string HttpMessage { get; set; }
 
         public HttpStatusCode StatusCode { get; set; }
+
+        public ErrorObject Error { get; set; }
     }
 }

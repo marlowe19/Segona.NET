@@ -18,8 +18,7 @@ namespace Incentro.Segona.Core
             _client = new HttpClient();
             _handler = new UriHandler();
         }
-
-
+        
         public async Task<IResponse> SearchAsync(RequestSettings settings)
         {
             var url = _handler.CreateApiUrl(_segonaUrl, "search", settings);

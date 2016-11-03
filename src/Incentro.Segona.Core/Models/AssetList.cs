@@ -10,5 +10,9 @@ namespace Incentro.Segona.Core.Models
         public string Cursor { get; set; }
 
         public IEnumerable<Asset> Items { get; set; }
+
+        public string Kind { get; set; }
+
+        public string Etag { get; set; }
     }
 }
