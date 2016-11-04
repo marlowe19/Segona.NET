@@ -1,59 +1,57 @@
-﻿using Incentro.Segona.Core.Abstractions;
-using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Net.Http;
+﻿using System;
 using System.Threading.Tasks;
+using Incentro.Segona.Core.Abstractions;
+using Incentro.Segona.Core.Configuration;
+using Incentro.Segona.Core.Models;
 
 namespace Incentro.Segona.Core
 {
-    public class SegonaClient : ISegonaClient
+    public class SegonaClient
     {
-        private HttpClient _client;
-        private UriHandler _handler;
-        private string _segonaUrl;
-
-        public SegonaClient(string segonaApiUrl)
+        public SegonaClient(ISegonaHandler handler, SegonaBuilderConfiguration configuration)
         {
-            _segonaUrl = segonaApiUrl;
-            _client = new HttpClient();
-            _handler = new UriHandler();
-        }
-        
-        public async Task<IResponse> SearchAsync(RequestSettings settings)
-        {
-            var url = _handler.CreateApiUrl(_segonaUrl, "search", settings);
-            var response = await _client.GetAsync(url);
-            return JsonConvert.DeserializeObject<Response>(await response.Content.ReadAsStringAsync());
+            Handler = handler;
+            Options = configuration.Options;
         }
 
-        public async Task<T> GetAssetById<T>(RequestSettings settings) where T : IAsset
+        public SegonaClient(ISegonaHandler handler, SegonaOptions options)
         {
-            var url = _handler.CreateApiUrl(_segonaUrl, "get", settings);
-            var response = await _client.GetAsync(url);
-
-            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
+            Handler = handler;
+            Options = options;
         }
 
-        public async Task<IResponse> GetAllAsync(RequestSettings settings)
+        protected ISegonaHandler Handler { get; set; }
+
+        protected SegonaOptions Options { get; set; }
+
+        public async Task<SegonaResponse<Keycheck>> ApiKeyCheckAsync()
         {
-            var url = _handler.CreateApiUrl(_segonaUrl, "list", settings);
-            if (settings.Debug)
-            {
-                Debug.Write("Request url" + url);
-            }
-            var response = await _client.GetAsync(url);
-            return JsonConvert.DeserializeObject<Response>(await response.Content.ReadAsStringAsync());
+            return await Handler.ApiKeyCheckAsync(Options.ApiKey);
         }
 
-        public async Task<IResponse> FilterAsync(RequestSettings settings)
+        public async Task<SegonaResponse<AssetList>> GetAllAssetsAsync(int limit = 50, int? startFromId = null)
         {
-            var url = _handler.CreateApiUrl(_segonaUrl, "filter", settings);
-            if (settings.Debug)
-            {
-                Debug.Write("Request url" + url);
-            }
-            var response = await _client.GetAsync(url);
-            return JsonConvert.DeserializeObject<Response>(await response.Content.ReadAsStringAsync());
+            return await Handler.GetAllAssetsAsync(Options.ApiKey, limit, startFromId);
+        }
+
+        public async Task<SegonaResponse<AssetDetail>> GetSpecificAssetAsync(Guid id)
+        {
+            return await Handler.GetSpecificAssetAsync(Options.ApiKey, id);
+        }
+
+        public async Task<SegonaResponse<AssetList>> SearchAssets(string query, int limit = 50)
+        {
+            return await Handler.SearchAssets(Options.ApiKey, query, limit);
+        }
+
+        public async Task<SegonaResponse<AssetList>> FilteredSearchAssets(string query, int limit = 50, string extraQuery = null, string color = null)
+        {
+            return await Handler.FilteredSearchAssets(Options.ApiKey, query, limit, extraQuery, color);
+        }
+
+        public async Task<SegonaResponse<UploadUrlObject>> GetUploadUrl()
+        {
+            return await Handler.GetUploadUrl(Options.ApiKey);
         }
     }
 }

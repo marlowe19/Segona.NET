@@ -1,9 +1,9 @@
-﻿using Incentro.Segona.Core.Abstractions;
-using Incentro.Segona.Core.Configuration;
+﻿using Incentro.Segona.Core.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
+using System.Net.Http;
 
 namespace Incentro.Segona.Core.Test
 {
@@ -14,13 +14,8 @@ namespace Incentro.Segona.Core.Test
         protected void ConfigureServices()
         {
             var services = new ServiceCollection();
-            ISegonaClient segonaClient = new SegonaClient(SegonaConfiguration.ApiUrl);
-
-            services.AddSingleton<ISegonaClient>(segonaClient);
-
-            IServiceProvider provider = services.BuildServiceProvider();
-
-            Provider = provider;
+            services.AddSegona(x => x.Options = Options);
+            Provider = services.BuildServiceProvider();
         }
 
         protected TestBase()
@@ -29,13 +24,13 @@ namespace Incentro.Segona.Core.Test
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            SegonaConfiguration = new SegonaConfiguration();
-            configuration.GetSection("segona").Bind(SegonaConfiguration);
+            Options = new SegonaOptions();
+            configuration.GetSection("segona").Bind(Options);
 
             //Configure DI
             ConfigureServices();
         }
 
-        protected SegonaConfiguration SegonaConfiguration { get; set; }
+        protected SegonaOptions Options { get; set; }
     }
 }

@@ -8,22 +8,21 @@ using Xunit;
 
 namespace Incentro.Segona.Core.Test
 {
-    public class SegonaWebClientTest : TestBase
+    public class SegonaRestHandlerTest : TestBase
     {
-        public SegonaWebClientTest()
+        public SegonaRestHandlerTest()
         {
-            Client = new SegonaRestClient(new HttpClient());
-            BaseApiUrl = new Uri(SegonaConfiguration.ApiUrl);
+            Handler = new SegonaRestHandler(new HttpClient(), new Uri(Options.ApiUrl));
         }
 
-        protected SegonaRestClient Client { get; set; }
+        protected SegonaRestHandler Handler { get; set; }
 
         protected Uri BaseApiUrl { get; set; }
 
         [Fact]
         public async Task ApiKeyCheck_Valid()
         {
-            var keycheck = await Client.ApiKeyCheckAsync(GetUrl("keycheck"), SegonaConfiguration.ApiKey);
+            var keycheck = await Handler.ApiKeyCheckAsync(Options.ApiKey);
             AssertValidResponse(keycheck);
             Assert.True(keycheck.Result.Valid);
         }
@@ -31,7 +30,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task ApiKeyCheck_Invalid()
         {
-            var keycheck = await Client.ApiKeyCheckAsync(GetUrl("keycheck"), "12345");
+            var keycheck = await Handler.ApiKeyCheckAsync("12345");
             AssertValidResponse(keycheck);
             Assert.False(keycheck.Result.Valid);
         }
@@ -39,14 +38,14 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task GetAllAssets()
         {
-            var assetList = await Client.GetAllAssetsAsync(GetUrl("list"), SegonaConfiguration.ApiKey);
+            var assetList = await Handler.GetAllAssetsAsync(Options.ApiKey);
             AssertValidResponse(assetList);
         }
 
         [Fact]
         public async Task GetAllTasks_Should_Get_Unauthorized_With_Invalid_ApiKey()
         {
-            var assetList = await Client.GetAllAssetsAsync(GetUrl("list"), "12345");
+            var assetList = await Handler.GetAllAssetsAsync("12345");
             AssertInvalidResponse(assetList);
             Assert.Equal(HttpStatusCode.Unauthorized, assetList.StatusCode);
         }
@@ -55,13 +54,13 @@ namespace Incentro.Segona.Core.Test
         public async Task GetSpecificAsset()
         {
             // First get assets
-            var assetsResponse = await Client.GetAllAssetsAsync(GetUrl("list"), SegonaConfiguration.ApiKey);
+            var assetsResponse = await Handler.GetAllAssetsAsync(Options.ApiKey);
             Assert.NotNull(assetsResponse?.Result?.Items);
             var assets = assetsResponse.Result.Items;
             Assert.True(assets.Any(), "Upload assets first");
             var firstAsset = assets.First();
 
-            var specificAssetResponse = await Client.GetSpecificAssetAsync(GetUrl("get"), SegonaConfiguration.ApiKey, firstAsset.Id);
+            var specificAssetResponse = await Handler.GetSpecificAssetAsync(Options.ApiKey, firstAsset.Id);
             AssertValidResponse(specificAssetResponse);
             Assert.Equal(firstAsset.Id, specificAssetResponse.Result.Id);
             Assert.Equal(firstAsset.OriginalName, specificAssetResponse.Result.OriginalName);
@@ -71,7 +70,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task GetSpecificAsset_NonExistant()
         {
-            var specificAsset = await Client.GetSpecificAssetAsync(GetUrl("get"), SegonaConfiguration.ApiKey, new Guid());
+            var specificAsset = await Handler.GetSpecificAssetAsync(Options.ApiKey, new Guid());
             AssertInvalidResponse(specificAsset);
             Assert.NotEmpty(specificAsset.Error.Error.Errors);
             Assert.Equal("notFound", specificAsset.Error.Error.Errors.First().Reason);
@@ -81,7 +80,7 @@ namespace Incentro.Segona.Core.Test
         public async Task SearchAssets()
         {
             // TODO: It's probably better to get an item first, scan for a tag, and then use that tag to search
-            var searchAssets = await Client.SearchAssets(GetUrl("search"), SegonaConfiguration.ApiKey, "ocean");
+            var searchAssets = await Handler.SearchAssets(Options.ApiKey, "ocean");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -89,7 +88,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task SearchAssets_Impossible_Query()
         {
-            var searchAssets = await Client.SearchAssets(GetUrl("search"), SegonaConfiguration.ApiKey, "23r08usdvjksj");
+            var searchAssets = await Handler.SearchAssets(Options.ApiKey, "23r08usdvjksj");
             AssertValidResponse(searchAssets);
             Assert.True(searchAssets.Result.Items == null || !searchAssets.Result.Items.Any());
         }
@@ -97,7 +96,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task FilterSearchAssets_With_Color()
         {
-            var searchAssets = await Client.FilteredSearchAssets(GetUrl("filter"), SegonaConfiguration.ApiKey, "ocean", color: "Blue");
+            var searchAssets = await Handler.FilteredSearchAssets(Options.ApiKey, "ocean", color: "Blue");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -105,7 +104,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task FilterSearchAssets_With_ExtraQuery()
         {
-            var searchAssets = await Client.FilteredSearchAssets(GetUrl("filter"), SegonaConfiguration.ApiKey, "ocean", extraQuery: "ship");
+            var searchAssets = await Handler.FilteredSearchAssets(Options.ApiKey, "ocean", extraQuery: "ship");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -113,7 +112,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task GetUploadUrl()
         {
-            var uploadUrl = await Client.GetUploadUrl(GetUrl("upload"), SegonaConfiguration.ApiKey);
+            var uploadUrl = await Handler.GetUploadUrl(Options.ApiKey);
             AssertValidResponse(uploadUrl);
             Assert.False(string.IsNullOrEmpty(uploadUrl.Result.UploadUrl.ToString()));
         }
@@ -134,7 +133,7 @@ namespace Incentro.Segona.Core.Test
 
         protected Uri GetUrl(string relativePath)
         {
-            return new Uri(SegonaConfiguration.ApiUrl + relativePath);
+            return new Uri(Options.ApiUrl + relativePath);
         }
     }
 }

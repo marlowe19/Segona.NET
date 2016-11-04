@@ -1,6 +1,6 @@
 ﻿namespace Incentro.Segona.Core.Configuration
 {
-    public class SegonaConfiguration
+    public class SegonaOptions
     {
         public string ApiUrl { get; set; }
 
