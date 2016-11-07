@@ -47,7 +47,7 @@ namespace Incentro.Segona.Core
 
         /// <summary>Retrieves a specific asset</summary>
         /// <param name="id">The ID of the asset to retrieve</param>
-        public async Task<SegonaResponse<AssetDetail>> GetSpecificAssetAsync(Guid id)
+        public async Task<SegonaResponse<Asset>> GetSpecificAssetAsync(Guid id)
         {
             return await Handler.GetSpecificAssetAsync(ApiKey, id);
         }

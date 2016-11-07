@@ -22,7 +22,7 @@ namespace Incentro.Segona.Core.Abstractions
         /// <summary>Retrieves a specific asset</summary>
         /// <param name="apiKey">Your API key</param>
         /// <param name="id">The ID of the asset to retrieve</param>
-        Task<SegonaResponse<AssetDetail>> GetSpecificAssetAsync(string apiKey, Guid id);
+        Task<SegonaResponse<Asset>> GetSpecificAssetAsync(string apiKey, Guid id);
 
         /// <summary>Searches all assets</summary>
         /// <param name="apiKey">Your API key</param>

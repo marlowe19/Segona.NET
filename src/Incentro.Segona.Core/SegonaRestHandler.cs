@@ -51,7 +51,7 @@ namespace Incentro.Segona.Core
             return await SendRequest<AssetList>(uriBuilder.Uri);
         }
 
-        public async Task<SegonaResponse<AssetDetail>> GetSpecificAssetAsync(string apiKey, Guid id)
+        public async Task<SegonaResponse<Asset>> GetSpecificAssetAsync(string apiKey, Guid id)
         {
             var uriBuilder = new UriBuilder(new Uri(ApiUrl, "get"));
             var queryBuilder = new UriQueryBuilder();
@@ -59,7 +59,7 @@ namespace Incentro.Segona.Core
             queryBuilder.Append("id", id);
 
             uriBuilder.Query = queryBuilder.Build();
-            return await SendRequest<AssetDetail>(uriBuilder.Uri);
+            return await SendRequest<Asset>(uriBuilder.Uri);
         }
 
         public async Task<SegonaResponse<AssetList>> SearchAssets(string apiKey, string query, int limit = 50)
