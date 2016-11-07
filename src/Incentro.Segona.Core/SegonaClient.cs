@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Incentro.Segona.Core.Abstractions;
-using Incentro.Segona.Core.Configuration;
 using Incentro.Segona.Core.Models;
 
 namespace Incentro.Segona.Core

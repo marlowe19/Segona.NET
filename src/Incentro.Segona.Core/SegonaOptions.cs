@@ -1,4 +1,4 @@
-﻿namespace Incentro.Segona.Core.Configuration
+﻿namespace Incentro.Segona.Core
 {
     public class SegonaOptions
     {

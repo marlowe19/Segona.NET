@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using Incentro.Segona.Core.Configuration;
 
 namespace Incentro.Segona.Core
 {
