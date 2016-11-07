@@ -16,9 +16,9 @@ namespace Incentro.Segona.Core
             ApiUrl = new Uri(configuration.Options.ApiUrl);
         }
 
-        public SegonaRestHandler(HttpClient httpClient, Uri apiUrl)
+        public SegonaRestHandler(Uri apiUrl, HttpClient httpClient = null)
         {
-            HttpClient = httpClient;
+            HttpClient = httpClient ?? new HttpClient();
             ApiUrl = apiUrl;
         }
 

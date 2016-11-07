@@ -12,7 +12,7 @@ namespace Incentro.Segona.Core.Test
     {
         public SegonaRestHandlerTest()
         {
-            Handler = new SegonaRestHandler(new HttpClient(), new Uri(Options.ApiUrl));
+            Handler = new SegonaRestHandler(new Uri(Options.ApiUrl));
         }
 
         protected SegonaRestHandler Handler { get; set; }
