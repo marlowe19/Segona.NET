@@ -7,23 +7,24 @@ Segona.NET provides an easy way to connect the segona api.
 
 Basic usage:
 ```C#
-var client = SegonaClient.Create(new SegonaOptions { ApiKey = "...", ApiUrl = "..." });
+var client = SegonaClient.Create(new SegonaOptions("<ApiUrl>", "<ApiKey>"));
 var response = await client.GetAllAssetsAsync();
 
 which is short for
+var options = new SegonaOptions("<ApiUrl>", "<ApiKey>");
 var client = new SegonaClient(new SegonaRestHandler(new Uri(options.ApiUrl)), options.ApiKey)';
 var response = await client.GetAllAssetsAsync();
 ```
 
 If you want dependency injection:
 ```C#
-IServicesCollection.AddSegona(configure => configure.Options = new SegonaOption{ ApiKey = "...", ApiUrl = "..." });
+IServicesCollection.AddSegona(configure => configure.Options = new SegonaOption("<ApiUrl>", "<ApiKey>"));
 
 Optionally you can add your HttpClient instance
 
 IServicesCollection.AddSegona(configure => 
 {
-    configure.Options = new SegonaOption{ ApiKey = "...", ApiUrl = "..." });
+    configure.Options = new SegonaOption("<ApiUrl>", "<ApiKey>"));
     configure.HttpClient = new HttpClient();
 };
 ```
