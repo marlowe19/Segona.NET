@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IO;
 
-namespace Incentro.Segona.Sample
+namespace Incentro.Segona.WebSample
 {
     public class Startup
     {

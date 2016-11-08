@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 
-namespace Incentro.Segona.Sample
+namespace Incentro.Segona.WebSample
 {
     public class SegonaContent : ByteArrayContent
     {

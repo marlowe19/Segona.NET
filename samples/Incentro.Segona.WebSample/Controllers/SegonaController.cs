@@ -4,7 +4,7 @@ using Incentro.Segona.Core;
 using Incentro.Segona.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Incentro.Segona.Sample.Controllers
+namespace Incentro.Segona.WebSample.Controllers
 {
     public class SegonaController : Controller
     {

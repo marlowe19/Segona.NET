@@ -5,7 +5,7 @@ using Incentro.Segona.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Incentro.Segona.Sample.Controllers
+namespace Incentro.Segona.WebSample.Controllers
 {
     public class UploadController : Controller
     {
