@@ -55,9 +55,9 @@ namespace Incentro.Segona.Core
         /// <summary>Searches all assets</summary>
         /// <param name="query">Your search term. Matches with labels, metadata, colors and the original file name</param>
         /// <param name="limit">How many items you want to retrieve in a single call.</param>
-        public async Task<SegonaResponse<AssetList>> SearchAssets(string query, int limit = 50)
+        public async Task<SegonaResponse<AssetList>> SearchAssetsAsync(string query, int limit = 50)
         {
-            return await Handler.SearchAssets(ApiKey, query, limit);
+            return await Handler.SearchAssetsAsync(ApiKey, query, limit);
         }
 
         /// <summary>Filters through assets</summary>
@@ -78,15 +78,15 @@ namespace Incentro.Segona.Core
         /// * Purple
         /// * Pink
         /// </param>
-        public async Task<SegonaResponse<AssetList>> FilteredSearchAssets(string query, int limit = 50, string extraQuery = null, string color = null)
+        public async Task<SegonaResponse<AssetList>> FilteredSearchAssetsAsync(string query, int limit = 50, string extraQuery = null, string color = null)
         {
-            return await Handler.FilteredSearchAssets(ApiKey, query, limit, extraQuery, color);
+            return await Handler.FilteredSearchAssetsAsync(ApiKey, query, limit, extraQuery, color);
         }
 
         /// <summary>Retrieves an upload url where you can upload your assets to</summary>
-        public async Task<SegonaResponse<UploadUrlObject>> GetUploadUrl()
+        public async Task<SegonaResponse<UploadUrlObject>> GetUploadUrlAsync()
         {
-            return await Handler.GetUploadUrl(ApiKey);
+            return await Handler.GetUploadUrlAsync(ApiKey);
         }
     }
 }

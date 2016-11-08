@@ -5,9 +5,8 @@ using Incentro.Segona.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Incentro.Segona.UploadTool.Controllers
+namespace Incentro.Segona.Sample.Controllers
 {
-    [Route("")]
     public class UploadController : Controller
     {
         public UploadController(SegonaBuilderConfiguration configuration, SegonaClient client)
@@ -29,7 +28,7 @@ namespace Incentro.Segona.UploadTool.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IFormFile file)
         {
-            var uploadUrl = await Client.GetUploadUrl();
+            var uploadUrl = await Client.GetUploadUrlAsync();
             if (!uploadUrl.IsSuccessful)
             {
                 return BadRequest("Can't get the upload url from Segona");

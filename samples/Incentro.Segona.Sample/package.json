@@ -1,0 +1,9 @@
+{
+	"version": "1.0.0",
+	"name": "segona-sample",
+	"private": true,
+  "devDependencies": {
+    "del": "2.2.2",
+    "gulp": "3.9.1"
+  }
+}

@@ -62,7 +62,7 @@ namespace Incentro.Segona.Core
             return await SendRequest<Asset>(uriBuilder.Uri);
         }
 
-        public async Task<SegonaResponse<AssetList>> SearchAssets(string apiKey, string query, int limit = 50)
+        public async Task<SegonaResponse<AssetList>> SearchAssetsAsync(string apiKey, string query, int limit = 50)
         {
             var uriBuilder = new UriBuilder(new Uri(ApiUrl, "search"));
             var queryBuilder = new UriQueryBuilder();
@@ -74,7 +74,7 @@ namespace Incentro.Segona.Core
             return await SendRequest<AssetList>(uriBuilder.Uri);
         }
 
-        public async Task<SegonaResponse<AssetList>> FilteredSearchAssets(string apiKey, string query, int limit = 50, string extraQuery = null, string color = null)
+        public async Task<SegonaResponse<AssetList>> FilteredSearchAssetsAsync(string apiKey, string query, int limit = 50, string extraQuery = null, string color = null)
         {
             var uriBuilder = new UriBuilder(new Uri(ApiUrl, "filter"));
             var queryBuilder = new UriQueryBuilder();
@@ -95,7 +95,7 @@ namespace Incentro.Segona.Core
             return await SendRequest<AssetList>(uriBuilder.Uri);
         }
 
-        public async Task<SegonaResponse<UploadUrlObject>> GetUploadUrl(string apiKey)
+        public async Task<SegonaResponse<UploadUrlObject>> GetUploadUrlAsync(string apiKey)
         {
             var uriBuilder = new UriBuilder(new Uri(ApiUrl, "upload"));
             var queryBuilder = new UriQueryBuilder();

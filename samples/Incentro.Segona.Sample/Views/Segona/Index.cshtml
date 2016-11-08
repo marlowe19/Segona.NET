@@ -1,0 +1,19 @@
+﻿<div class="row">
+    <div class="col-lg-4 col-md-6">
+        @Html.Partial("ApiKeyCheck")
+        @Html.Partial("GetAllAssets")
+        @Html.Partial("GetSpecificAsset")
+        @Html.Partial("SearchThroughAssets")
+        @Html.Partial("FilterSearchResults")
+        @Html.Partial("GetUploadUrl")
+    </div>
+    
+    <div class="col-lg-8 col-md-6">
+        <div id="result-container" class="row">
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/main.js"></script>
+}

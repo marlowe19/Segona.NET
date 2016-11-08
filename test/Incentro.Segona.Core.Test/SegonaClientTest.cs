@@ -18,8 +18,8 @@ namespace Incentro.Segona.Core.Test
         public async Task Test()
         {
             var allAssets = await Client.GetAllAssetsAsync();
-            var search = await Client.SearchAssets("ocean");
-            var filtered = await Client.FilteredSearchAssets("ocean", color: "Purple");
+            var search = await Client.SearchAssetsAsync("ocean");
+            var filtered = await Client.FilteredSearchAssetsAsync("ocean", color: "Purple");
         }
     }
 }

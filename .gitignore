@@ -245,3 +245,5 @@ ModelManifest.xml
 
 # Segona .NET
 appsettings.json
+bower_components/
+wwwroot/

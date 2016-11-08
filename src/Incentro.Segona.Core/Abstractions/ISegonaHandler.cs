@@ -28,7 +28,7 @@ namespace Incentro.Segona.Core.Abstractions
         /// <param name="apiKey">Your API key</param>
         /// <param name="query">Your search term. Matches with labels, metadata, colors and the original file name</param>
         /// <param name="limit">How many items you want to retrieve in a single call.</param>
-        Task<SegonaResponse<AssetList>> SearchAssets(string apiKey, string query, int limit = 50);
+        Task<SegonaResponse<AssetList>> SearchAssetsAsync(string apiKey, string query, int limit = 50);
 
         /// <summary>Filters through assets</summary>
         /// <param name="apiKey">Your API key</param>
@@ -49,10 +49,10 @@ namespace Incentro.Segona.Core.Abstractions
         /// * Purple
         /// * Pink
         /// </param>
-        Task<SegonaResponse<AssetList>> FilteredSearchAssets(string apiKey, string query, int limit = 50, string extraQuery = null, string color = null);
+        Task<SegonaResponse<AssetList>> FilteredSearchAssetsAsync(string apiKey, string query, int limit = 50, string extraQuery = null, string color = null);
 
         /// <summary>Retrieves an upload url where you can upload your assets to</summary>
         /// <param name="apiKey">Your API key</param>
-        Task<SegonaResponse<UploadUrlObject>> GetUploadUrl(string apiKey);
+        Task<SegonaResponse<UploadUrlObject>> GetUploadUrlAsync(string apiKey);
     }
 }

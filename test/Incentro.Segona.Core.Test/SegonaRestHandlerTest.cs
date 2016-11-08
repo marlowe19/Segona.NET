@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Incentro.Segona.Core.Models;
 using Xunit;
@@ -80,7 +79,7 @@ namespace Incentro.Segona.Core.Test
         public async Task SearchAssets()
         {
             // TODO: It's probably better to get an item first, scan for a tag, and then use that tag to search
-            var searchAssets = await Handler.SearchAssets(Options.ApiKey, "ocean");
+            var searchAssets = await Handler.SearchAssetsAsync(Options.ApiKey, "ocean");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -88,7 +87,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task SearchAssets_Impossible_Query()
         {
-            var searchAssets = await Handler.SearchAssets(Options.ApiKey, "23r08usdvjksj");
+            var searchAssets = await Handler.SearchAssetsAsync(Options.ApiKey, "23r08usdvjksj");
             AssertValidResponse(searchAssets);
             Assert.True(searchAssets.Result.Items == null || !searchAssets.Result.Items.Any());
         }
@@ -96,7 +95,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task FilterSearchAssets_With_Color()
         {
-            var searchAssets = await Handler.FilteredSearchAssets(Options.ApiKey, "ocean", color: "Blue");
+            var searchAssets = await Handler.FilteredSearchAssetsAsync(Options.ApiKey, "ocean", color: "Blue");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -104,7 +103,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task FilterSearchAssets_With_ExtraQuery()
         {
-            var searchAssets = await Handler.FilteredSearchAssets(Options.ApiKey, "ocean", extraQuery: "ship");
+            var searchAssets = await Handler.FilteredSearchAssetsAsync(Options.ApiKey, "ocean", extraQuery: "ship");
             AssertValidResponse(searchAssets);
             Assert.NotEmpty(searchAssets.Result.Items);
         }
@@ -112,7 +111,7 @@ namespace Incentro.Segona.Core.Test
         [Fact]
         public async Task GetUploadUrl()
         {
-            var uploadUrl = await Handler.GetUploadUrl(Options.ApiKey);
+            var uploadUrl = await Handler.GetUploadUrlAsync(Options.ApiKey);
             AssertValidResponse(uploadUrl);
             Assert.False(string.IsNullOrEmpty(uploadUrl.Result.UploadUrl.ToString()));
         }

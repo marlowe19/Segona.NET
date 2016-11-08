@@ -1,12 +1,12 @@
-﻿using System.IO;
-using Incentro.Segona.Core;
+﻿using Incentro.Segona.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IO;
 
-namespace Incentro.Segona.UploadTool
+namespace Incentro.Segona.Sample
 {
     public class Startup
     {
@@ -40,6 +40,7 @@ namespace Incentro.Segona.UploadTool
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }
