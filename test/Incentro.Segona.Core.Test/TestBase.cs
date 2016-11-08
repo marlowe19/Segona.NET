@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
-using System.Net.Http;
 
 namespace Incentro.Segona.Core.Test
 {
