@@ -1,4 +1,17 @@
-﻿<form id="form" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" multiple="multiple">
+﻿@using Incentro.Segona.Core
+@inject SegonaClient Client
+@inject SegonaBuilderConfiguration Configuration
+@{
+    var response = await Client.GetUploadUrlAsync();
+}
+
+<form id="form" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
     <button type="submit">Submit</button>
 </form>
+
+@*<form action="@response.Result.UploadUrl" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="apiKey" value="@Configuration.Options.ApiKey" />
+    <input type="file" name="myFile">
+    <input type="submit" value="Submit">
+</form>*@

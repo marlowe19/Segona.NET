@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Incentro.Segona.Core;
 using Microsoft.AspNetCore.Http;
@@ -34,17 +36,18 @@ namespace Incentro.Segona.WebSample.Controllers
                 return BadRequest("Can't get the upload url from Segona");
             }
 
-            string fileContent;
-            using (var reader = new StreamReader(file.OpenReadStream()))
-            {
-                fileContent = await reader.ReadToEndAsync();
-            }
+            var stringContent = new StringContent(Configuration.Options.ApiKey);
+            stringContent.Headers.Add("Content-Disposition", "form-data; name=\"apiKey\"");
 
-            var content = new SegonaContent(new Dictionary<string, string>
+            var streamContent = new StreamContent(file.OpenReadStream());
+            streamContent.Headers.Add("Content-Type", file.ContentType);
+            streamContent.Headers.Add("Content-Disposition", file.ContentDisposition);
+
+            var content = new MultipartFormDataContent
             {
-                ["apiKey"] = Configuration.Options.ApiKey,
-                ["file"] = fileContent
-            });
+                { streamContent, "myFile", file.FileName },
+                { stringContent, "apiKey" }
+            };
 
             var response = await Configuration.HttpClient.PostAsync(uploadUrl.Result.UploadUrl, content);
             if (response.IsSuccessStatusCode)
