@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Incentro.Segona.Core.Models;
-using Microsoft.Extensions.Logging.Debug;
+using Microsoft.Extensions.Logging.Console;
 using Xunit;
 
 namespace Incentro.Segona.Core.Test
@@ -12,7 +12,7 @@ namespace Incentro.Segona.Core.Test
     {
         public SegonaRestHandlerTest()
         {
-            Handler = new SegonaRestHandler(new Uri(Options.ApiUrl), null, new DebugLogger("Segona Test Debug Logger"));
+            Handler = new SegonaRestHandler(new Uri(Options.ApiUrl), null, new ConsoleLogger("Debug", (s, level) => true, true));
         }
 
         protected SegonaRestHandler Handler { get; set; }

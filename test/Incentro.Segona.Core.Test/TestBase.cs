@@ -35,7 +35,7 @@ namespace Incentro.Segona.Core.Test
 
         protected void ConfigureLogging(ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddDebug();
+            loggerFactory.AddConsole();
         }
     }
 }
