@@ -6,12 +6,12 @@ namespace Incentro.Segona.Core.Factories
 {
     public static class SegonaResponseFactory
     {
-        public static SegonaResponse<T> CreateSuccesful<T>(string message)
+        public static SegonaResponse<T> CreateSuccessful<T>(string message)
         {
             return new SegonaResponse<T> { IsSuccessful = true, Result = JsonConvert.DeserializeObject<T>(message), HttpMessage = message, StatusCode = HttpStatusCode.OK };
         }
 
-        public static SegonaResponse<T> CreateNonSuccesful<T>(HttpStatusCode statusCode, string message)
+        public static SegonaResponse<T> CreateNonSuccessful<T>(HttpStatusCode statusCode, string message)
         {
             var response =  new SegonaResponse<T> { IsSuccessful = false, Result = default(T), StatusCode = statusCode, HttpMessage = message };
             switch (statusCode)

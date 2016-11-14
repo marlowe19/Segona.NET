@@ -13,6 +13,8 @@ namespace Incentro.Segona.Core
             configurator?.Invoke(configuration);
             services.AddSingleton(configuration);
 
+            services.AddLogging();
+
             var builder = new SegonaBuilder(services);
             builder.SetHandler<SegonaRestHandler>();
             return builder;
