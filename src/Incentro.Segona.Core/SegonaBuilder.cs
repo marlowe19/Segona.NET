@@ -5,6 +5,8 @@ namespace Incentro.Segona.Core
 {
     public class SegonaBuilder : ISegonaBuilder
     {
+        // Trigger dem build!
+
         private readonly IServiceCollection _services;
 
         public SegonaBuilder(IServiceCollection services)
