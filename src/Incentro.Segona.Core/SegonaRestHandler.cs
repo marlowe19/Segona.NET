@@ -126,12 +126,13 @@ namespace Incentro.Segona.Core
             if (response.IsSuccessStatusCode)
             {
                 Logger.LogInformation(logId, "Response is successful");
-                var resultAsString = await response.Content.ReadAsStringAsync();
-                return SegonaResponseFactory.CreateSuccessful<T>(resultAsString);
+            }
+            else
+            {
+                Logger.LogWarning(logId, "Reponse is not successful");
             }
 
-            Logger.LogWarning(logId, "Reponse is not successful");
-            return SegonaResponseFactory.CreateNonSuccessful<T>(response.StatusCode, await response.Content.ReadAsStringAsync());
+            return await SegonaResponseFactory.CreateFromHttpResponseMessage<T>(response);
         }
     }
 }
